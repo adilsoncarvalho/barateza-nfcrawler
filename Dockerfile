@@ -6,5 +6,7 @@ RUN apk add curl libxml2-dev libxslt-dev libffi-dev gcc musl-dev libgcc openssl-
 RUN pip install scrapy
 
 RUN mkdir -p /scrapy
-WORKDIR /scrapy
 COPY . /scrapy
+WORKDIR /scrapy/nfcrawler
+
+CMD ["scrapy", "crawl", "pr-nfce"]
