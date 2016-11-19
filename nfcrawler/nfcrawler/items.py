@@ -3,7 +3,7 @@
 from scrapy import Item, Field
 from scrapy.loader.processors import MapCompose, Identity
 from w3lib.html import remove_tags
-from nfcrawler.utils import to_int, to_decimal
+from nfcrawler.utils import to_int, to_decimal, to_datetime
 
 # ---
 class NFeEmitenteItem(Item):
@@ -42,10 +42,12 @@ class NFeEmissaoItem(Item):
 class NFeSituacaoItem(Item):
   evento = Field()
   protocolo = Field()
-  # TODO: create a DATE TIME ZONE processor
-  data_autorizacao = Field()
-  # TODO: create a DATE TIME ZONE processor
-  data_inclusao_bd = Field()
+  data_autorizacao = Field(
+    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+  )
+  data_inclusao_bd = Field(
+    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+  )
 
 class NFeItem(Item):
   chave_acesso = Field()
@@ -53,10 +55,12 @@ class NFeItem(Item):
   serie = Field()
   numero = Field()
   versao_xml = Field()
-  # TODO: create a DATE TIME ZONE processor
-  data_emissao = Field()
-  # TODO: create a DATE TIME ZONE processor
-  data_entrada_saida = Field()
+  data_emissao = Field(
+    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+  )
+  data_entrada_saida = Field(
+    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+  )
   # TODO break into codigo/descricao
   formato_danfe = Field()
   versao_xslt = Field()
