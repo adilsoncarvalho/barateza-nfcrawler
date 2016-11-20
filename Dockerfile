@@ -9,4 +9,4 @@ RUN mkdir -p /scrapy
 COPY . /scrapy
 WORKDIR /scrapy/nfcrawler
 
-CMD ["scrapy", "crawl", "pr-nfce"]
+CMD ["bin/crawl.sh"]

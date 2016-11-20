@@ -8,7 +8,7 @@ systems.
 
 ### Building the image locally
 
-    docker build -t . barateza-nfcrawler
+    docker build . -t barateza-nfcrawler
     docker-compose build
     docker-compose up --build
 
@@ -21,3 +21,14 @@ systems.
 
     docker rmi barateza-nfcrawler
     docker-compose down
+
+### Running the crawler
+
+    docker run --rm -ti barateza-nfcrawler
+
+#### Options as env vars
+
+Pass them to the container using the `-e`/`--env` option. It is also possible
+to pass them using a `--env-file` option.
+
+- `LOGFILE` location for the log file (default to `/scrapy/nfcrawler/.scrapy/log/logfile.log`)
