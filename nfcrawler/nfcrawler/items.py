@@ -2,8 +2,7 @@
 
 from scrapy import Item, Field
 from scrapy.loader.processors import MapCompose, Identity
-from w3lib.html import remove_tags
-from nfcrawler.utils import to_int, to_decimal, to_datetime
+from nfcrawler.utils import to_int, to_decimal, to_datetime, string_cleaner
 
 # ---
 class NFeEmitenteItem(Item):
@@ -43,10 +42,10 @@ class NFeSituacaoItem(Item):
   evento = Field()
   protocolo = Field()
   data_autorizacao = Field(
-    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+    input_processor=MapCompose(string_cleaner, to_datetime)
   )
   data_inclusao_bd = Field(
-    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+    input_processor=MapCompose(string_cleaner, to_datetime)
   )
 
 class NFeItem(Item):
@@ -56,16 +55,16 @@ class NFeItem(Item):
   numero = Field()
   versao_xml = Field()
   data_emissao = Field(
-    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+    input_processor=MapCompose(string_cleaner, to_datetime)
   )
   data_entrada_saida = Field(
-    input_processor=MapCompose(remove_tags, unicode.strip, to_datetime)
+    input_processor=MapCompose(string_cleaner, to_datetime)
   )
   # TODO break into codigo/descricao
   formato_danfe = Field()
   versao_xslt = Field()
   valor_total_nf = Field(
-    input_processor=MapCompose(remove_tags, unicode.strip, to_decimal)
+    input_processor=MapCompose(string_cleaner, to_decimal)
   )
   emitente = Field(
     serializer=NFeEmitenteItem,
@@ -161,7 +160,7 @@ class TransporteItem(Item):
 class CobrancaItem(Item):
   # TODO break into codigo/descricao
   forma_pagamento = Field()
-  valor_pagamento = Field(input_processor=MapCompose(remove_tags, unicode.strip, to_decimal))
+  valor_pagamento = Field(input_processor=MapCompose(string_cleaner, to_decimal))
   # TODO break into codigo/descricao
   tipo_integracao_pagamento = Field()
   cnpj_credenciadora = Field()
@@ -192,17 +191,17 @@ class ProdutoValoresItem(Item):
 class ProdutoComTribItem(Item):
   ean = Field()
   unidade = Field()
-  quantidade = Field(input_processor=MapCompose(remove_tags, unicode.strip, to_decimal))
-  valor_unitario = Field(input_processor=MapCompose(remove_tags, unicode.strip, to_decimal))
+  quantidade = Field(input_processor=MapCompose(string_cleaner, to_decimal))
+  valor_unitario = Field(input_processor=MapCompose(string_cleaner, to_decimal))
 
 # ---
 
 class ProdutoItem(Item):
-  ord = Field(input_processor=MapCompose(remove_tags, unicode.strip, to_int))
+  ord = Field(input_processor=MapCompose(string_cleaner, to_int))
   descricao = Field()
-  quantidade = Field(input_processor=MapCompose(remove_tags, unicode.strip, to_decimal))
+  quantidade = Field(input_processor=MapCompose(string_cleaner, to_decimal))
   unidade = Field()
-  valor = Field(input_processor=MapCompose(remove_tags, unicode.strip, to_decimal))
+  valor = Field(input_processor=MapCompose(string_cleaner, to_decimal))
   codigos = Field(serializer=ProdutoCodigosItem)
   valores = Field(serializer=ProdutoValoresItem)
   comercializacao = Field(serializer=ProdutoComTribItem)

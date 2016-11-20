@@ -2,10 +2,10 @@
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import TakeFirst, MapCompose, Compose
 from nfcrawler.items import *
-from nfcrawler.utils import to_decimal
+from nfcrawler.utils import to_decimal, string_cleaner
 
 class CommonLoader(ItemLoader):
-    default_input_processor = MapCompose(remove_tags, unicode.strip)
+    default_input_processor = MapCompose(string_cleaner)
     default_output_processor = TakeFirst()
 
 class DocumentLoader(ItemLoader):
@@ -34,7 +34,7 @@ class DestinatarioLoader(CommonLoader):
 
 class TotaisLoader(CommonLoader):
     default_item_class = TotaisItem
-    default_input_processor = MapCompose(remove_tags, unicode.strip, to_decimal)
+    default_input_processor = MapCompose(string_cleaner, to_decimal)
 
 class TransporteLoader(CommonLoader):
     default_item_class = TransporteItem
@@ -50,7 +50,7 @@ class ProdutoCodigosLoader(CommonLoader):
 
 class ProdutoValoresLoader(CommonLoader):
     default_item_class = ProdutoValoresItem
-    default_input_processor = MapCompose(remove_tags, unicode.strip, to_decimal)
+    default_input_processor = MapCompose(string_cleaner, to_decimal)
 
 class ProdutoComTribLoader(CommonLoader):
     default_item_class = ProdutoComTribItem

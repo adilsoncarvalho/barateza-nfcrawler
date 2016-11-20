@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 import re
+from unidecode import unidecode
+from w3lib.html import remove_tags
+
+def string_cleaner(str):
+  return re.compile('\s+').sub(' ', unidecode(unicode.strip(remove_tags(str))))
 
 def to_decimal(value):
   if value.strip() == "":
