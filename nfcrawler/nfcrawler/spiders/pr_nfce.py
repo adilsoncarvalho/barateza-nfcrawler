@@ -9,16 +9,10 @@ from nfcrawler.items import *
 class PrNfceSpider(scrapy.Spider):
     name = "pr-nfce"
     allowed_domains = ["www.dfeportal.fazenda.pr.gov.br"]
-    start_urls = [
-      # one item (fuel)
-      # 'http://www.dfeportal.fazenda.pr.gov.br/dfe-portal/rest/servico/consultaNFCe?chNFe=41161108624219000173650010000879541745492130&nVersao=100&tpAmb=1&cDest=02236640900&dhEmi=323031362d31312d31325431363a33373a33312d30323a3030&vNF=102.20&vICMS=0.00&digVal=776c4f4b424a4d44614b384d532f4779504641434c6e32442b74383d&cIdToken=000002&cHashQRCode=2781488E3A5F5DD0CFB18616B36A5F4A66C7D2EC',
-      # 3 items
-      # 'http://www.dfeportal.fazenda.pr.gov.br/dfe-portal/rest/servico/consultaNFCe?chNFe=41161117745683000109650120000013011000015832&nVersao=100&tpAmb=1&cDest=02236640900&dhEmi=323031362d31312d31305431383a33393a34372d30323a3030&vNF=65.03&vICMS=0.00&digVal=4b685958654874434b52512b55525030527233513171632b5457633d&cIdToken=000001&cHashQRCode=386891E5C1D7B3E5D9D84D09F4B0D31C49C5124D',
-      # 7 items
-      'http://www.dfeportal.fazenda.pr.gov.br/dfe-portal/rest/servico/consultaNFCe?chNFe=41161176189406002412651190000337421101819214&nVersao=100&tpAmb=1&cDest=02236640900&dhEmi=323031362d31312d31305431383a31393a32312d30323a3030&vNF=38.72&vICMS=3.26&digVal=502b7663785154305335316d536b34726f70392f4e7561774578493d&cIdToken=000001&cHashQRCode=CE624A6959CF87362570112D42D9B1F49A82B8EE',
-      # 42 items (with discounts)
-      # 'http://www.dfeportal.fazenda.pr.gov.br/dfe-portal/rest/servico/consultaNFCe?chNFe=41161176430438007508650060000030311006060456&nVersao=100&tpAmb=1&cDest=02236640900&dhEmi=323031362d31312d31345431353a33383a30342d30323a3030&vNF=209.29&vICMS=2.63&digVal=6d72732b36597750536f65617458563342526170566164324c2f413d&cIdToken=000001&cHashQRCode=A13288FD63DDE2E119B07B7A57DBED488D370D33%1B',
-    ]
+
+    def __init__(self, *args, **kwargs):
+      super(PrNfceSpider, self).__init__(*args, **kwargs)
+      self.start_urls = [kwargs.get('start_url')]
 
     # ------ helper functions
 
