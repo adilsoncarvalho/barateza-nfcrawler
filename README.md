@@ -31,4 +31,5 @@ systems.
 Pass them to the container using the `-e`/`--env` option. It is also possible
 to pass them using a `--env-file` option.
 
-- `LOGFILE` location for the log file (default to `/scrapy/nfcrawler/.scrapy/log/logfile.log`)
+- `LOGFILE` location for the log file (defaults to `/scrapy/nfcrawler/.scrapy/log/logfile.log`)
+- `DATAFILE` location for the items file (defaults to `/scrapy/nfcrawler/.scrapy/data/items.json`)
