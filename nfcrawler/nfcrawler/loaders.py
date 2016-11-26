@@ -10,6 +10,7 @@ class CommonLoader(ItemLoader):
 
 class DocumentLoader(ItemLoader):
     default_item_class = DocumentItem
+    default_output_processor = TakeFirst()
 
 class NFeLoader(CommonLoader):
     default_item_class = NFeItem

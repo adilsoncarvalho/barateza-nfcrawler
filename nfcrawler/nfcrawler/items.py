@@ -216,4 +216,4 @@ class DocumentItem(Item):
   totais = Field(serializer=TotaisItem)
   transporte = Field(serializer=TransporteItem)
   cobranca = Field(serializer=CobrancaItem)
-  produtos = Field(serializer=ProdutoItem)
+  produtos = Field(output_processor=Identity())
