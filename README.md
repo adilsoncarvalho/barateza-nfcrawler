@@ -1,4 +1,4 @@
-barateza/nfcrawler
+barateza/nfcrawler [![waffle.io dashboard](https://img.shields.io/badge/waffle.io-dashboard-yellow.svg)](https://waffle.io/adilsoncarvalho/barateza-nfcrawler)
 ===================
 
 ## Docker
