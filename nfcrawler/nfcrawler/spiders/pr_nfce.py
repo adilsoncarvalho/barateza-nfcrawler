@@ -3,6 +3,7 @@ import scrapy
 import re
 from nfcrawler.loaders import *
 from nfcrawler.items import *
+from nfcrawler.utils import get_version
 
 # Extracted documents at https://github.com/adilsoncarvalho/barateza-nfcrawler/wiki/NFCe-Paraná
 
@@ -36,6 +37,7 @@ class PrNfceSpider(scrapy.Spider):
 
     def parse_detailed_page(self, response):
         loader = DocumentLoader(response=response)
+        loader.add_value('spider', self.get_spider(response))
         loader.add_value('nfe', self.get_nfe(response))
         loader.add_value('emitente', self.get_emitente(response))
         loader.add_value('destinatario', self.get_destinatario(response))
@@ -43,6 +45,11 @@ class PrNfceSpider(scrapy.Spider):
         loader.add_value('transporte', self.get_transporte(response))
         loader.add_value('cobranca', self.get_cobranca(response))
         loader.add_value('produtos', self.get_produtos(response))
+        return loader.load_item()
+
+    def get_spider(self, response):
+        loader = SpiderLoader(response=response)
+        loader.add_value('version', get_version(self))
         return loader.load_item()
 
     def get_nfe(self, response):

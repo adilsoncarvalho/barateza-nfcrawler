@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+import os
 import re
+import subprocess
+import inspect
 from unidecode import unidecode
 from w3lib.html import remove_tags
 
@@ -44,3 +47,14 @@ def save_to_file(self, file_name, content):
 
     with open(file_name, 'w') as file:
         file.write(content)
+
+def get_version(self):
+  version_filename = get_version_file(self)
+  if os.path.exists(version_filename):
+    version = open(version_filename, 'r').read().strip()
+  else:
+    version = 'dev'
+  return self.name + '/' + version
+
+def get_version_file(self):
+  return os.path.splitext(inspect.getfile(self.__class__))[0] + '.version'

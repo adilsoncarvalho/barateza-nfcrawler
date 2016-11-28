@@ -5,6 +5,11 @@ from scrapy.loader.processors import MapCompose, Identity
 from nfcrawler.utils import to_int, to_decimal, to_datetime, string_cleaner
 
 # ---
+
+class SpiderItem(Item):
+  version = Field()
+
+# ---
 class NFeEmitenteItem(Item):
   razao_social = Field()
   cnpj = Field()
@@ -210,6 +215,7 @@ class ProdutoItem(Item):
 # ---
 
 class DocumentItem(Item):
+  spider = Field(serializer=SpiderItem)
   nfe = Field(serializer=NFeItem)
   emitente = Field(serializer=EmitenteItem)
   destinatario = Field(serializer=DestinatarioItem)

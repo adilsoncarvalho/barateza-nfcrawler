@@ -15,6 +15,9 @@ class DocumentLoader(ItemLoader):
 class NFeLoader(CommonLoader):
     default_item_class = NFeItem
 
+class SpiderLoader(CommonLoader):
+    default_item_class = SpiderItem
+
 class NFeEmitenteLoader(CommonLoader):
     default_item_class = NFeEmitenteItem
 
